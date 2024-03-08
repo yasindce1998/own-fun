@@ -13,7 +13,10 @@ func init() {
 }
 
 func main() {
-	if Toss() == "heads" {
+	var toss string
+	fmt.Println("Choose heads or tails:\n 1. heads\n 2.tails")
+	fmt.Scanln(&toss)
+	if Toss() == toss {
 		fmt.Println("You Won the Toss")
 	} else {
 		fmt.Println("You lose the Toss")
