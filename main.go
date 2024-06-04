@@ -14,7 +14,7 @@ func init() {
 
 func main() {
 	var toss string
-	fmt.Println("Choose heads or tails:\n 1. heads\n 2.tails")
+	fmt.Println("Choose heads or tails:\n 1.heads\n 2.tails")
 	fmt.Scanln(&toss)
 	if Toss() == toss {
 		fmt.Println("You Won the Toss")
@@ -28,4 +28,8 @@ func Toss() (result string) {
 	words := []string{"heads", "tails"}
 	index := r.Intn(len(words))
 	return words[index]
+}
+
+func ChooseBatOrBowl() {
+	
 }
