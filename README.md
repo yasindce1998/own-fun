@@ -61,9 +61,7 @@ You: Elephant
 Score: 8
 This game will go on until the six ball finish.
 You chose single team so your oppoent will be system.
-
-
-
+```
 
 **#englishcricket #golang #programming #fun**
 
