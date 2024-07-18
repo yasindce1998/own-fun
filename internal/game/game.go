@@ -61,6 +61,12 @@ func (g *Game) Start() {
     }
 
     g.CoinToss()
+    
+    // Initialize CurrentBat and CurrentBowl based on coin toss result
+    if g.CurrentBat == nil {
+        g.CurrentBat = g.Player2
+        g.CurrentBowl = g.Player1
+    }
 }
 
 func (g *Game) CoinToss() {
@@ -78,6 +84,8 @@ func (g *Game) CoinToss() {
         g.ChooseBatOrBowl()
     } else {
         fmt.Println("You lost the toss. System chooses to bowl.")
+        g.CurrentBat = g.Player1
+        g.CurrentBowl = g.Player2
     }
 }
 
@@ -88,8 +96,12 @@ func (g *Game) ChooseBatOrBowl() {
     var choice int
     fmt.Scan(&choice)
 
-    if choice == 2 {
-        g.CurrentBat, g.CurrentBowl = g.CurrentBowl, g.CurrentBat
+    if choice == 1 {
+        g.CurrentBat = g.Player1
+        g.CurrentBowl = g.Player2
+    } else {
+        g.CurrentBat = g.Player2
+        g.CurrentBowl = g.Player1
     }
 }
 
