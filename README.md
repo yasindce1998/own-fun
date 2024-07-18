@@ -62,6 +62,25 @@ Score: 8
 This game will go on until the six ball finish.
 You chose single team so your oppoent will be system.
 ```
+## Code base structure
+```
+english-cricket/
+├── cmd/
+│   └── ec/
+│       └── main.go
+├── internal/
+│   ├── game/
+│   │   ├── game.go
+│   │   ├── player.go
+│   │   └── system.go
+│   ├── ui/
+│   │   └── ui.go
+│   └── utils/
+│       └── wordvalidator.go
+├── words.txt
+├── go.mod
+└── go.sum
+```
 
 **#englishcricket #golang #programming #fun**
 

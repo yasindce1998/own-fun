@@ -1,0 +1,27 @@
+// words.txt
+apple
+banana
+cat
+dog
+elephant
+frog
+guitar
+house
+igloo
+jacket
+kite
+lemon
+mouse
+notebook
+orange
+penguin
+queen
+rabbit
+sun
+tree
+umbrella
+violin
+water
+xylophone
+yellow
+zebra
