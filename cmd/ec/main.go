@@ -35,7 +35,28 @@ func main() {
         os.Exit(1)
     }
 
-    g := game.NewGame(game.GameMode(mode-1), overs)
+    fmt.Println("Select difficulty level:")
+    fmt.Println("1. Easy")
+    fmt.Println("2. Medium")
+    fmt.Println("3. Hard")
+
+    var difficultyChoice int
+    fmt.Scan(&difficultyChoice)
+
+    var difficulty game.DifficultyLevel
+    switch difficultyChoice {
+    case 1:
+        difficulty = game.Easy
+    case 2:
+        difficulty = game.Medium
+    case 3:
+        difficulty = game.Hard
+    default:
+        fmt.Println("Invalid choice. Exiting.")
+        os.Exit(1)
+    }
+
+    g := game.NewGame(game.GameMode(mode-1), overs, difficulty)
     g.Start() // This will handle the coin toss
     ui.RunGame(g)
 }

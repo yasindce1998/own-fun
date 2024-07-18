@@ -3,31 +3,43 @@ package game
 import (
     "fmt"
     "math/rand"
-    "strings"
     "time"
 )
 
 type GameMode int
+type DifficultyLevel int
 
 const (
     SingleTeam GameMode = iota
     TwoTeam
 )
 
+const (
+    Easy DifficultyLevel = iota
+    Medium
+    Hard
+)
+
 type Game struct {
-    Mode        GameMode
-    Overs       int
-    CurrentBat  *Player
-    CurrentBowl *Player
-    System      *System
-    TotalBalls  int
-    CurrentBall int
-    IsOver      bool
+    Mode           GameMode
+    Difficulty     DifficultyLevel
+    Overs          int
+    CurrentBat     *Player
+    CurrentBowl    *Player
+    Player1        *Player
+    Player2        *Player
+    System         *System
+    TotalBalls     int
+    CurrentBall    int
+    IsOver         bool
+    HighestWord    string
+    TotalWordCount int
 }
 
-func NewGame(mode GameMode, overs int) *Game {
+func NewGame(mode GameMode, overs int, difficulty DifficultyLevel) *Game {
     game := &Game{
         Mode:        mode,
+        Difficulty:  difficulty,
         Overs:       overs,
         System:      NewSystem(),
         TotalBalls:  overs * 6,
@@ -41,12 +53,11 @@ func (g *Game) Start() {
     fmt.Println("Welcome to English Cricket!")
     
     if g.Mode == SingleTeam {
-        g.CurrentBat = NewPlayer("You")
-        g.CurrentBowl = g.System.Player
+        g.Player1 = NewPlayer("You")
+        g.Player2 = g.System.Player
     } else {
-        // Implement two-player mode later
-        fmt.Println("Two-player mode not implemented yet.")
-        return
+        g.Player1 = NewPlayer("Player 1")
+        g.Player2 = NewPlayer("Player 2")
     }
 
     g.CoinToss()
@@ -99,5 +110,24 @@ func (g *Game) PlayBall(word string) (int, error) {
     
     score := len(word)
     g.CurrentBat.Score += score
+    g.TotalWordCount++
+    
+    if len(word) > len(g.HighestWord) {
+        g.HighestWord = word
+    }
+    
     return score, nil
+}
+
+func (g *Game) SwitchInnings() {
+    g.CurrentBat, g.CurrentBowl = g.CurrentBowl, g.CurrentBat
+    g.CurrentBall = 1
+    g.IsOver = false
+}
+
+func (g *Game) GetAverageWordLength() float64 {
+    if g.TotalWordCount == 0 {
+        return 0
+    }
+    return float64(g.Player1.Score+g.Player2.Score) / float64(g.TotalWordCount)
 }
